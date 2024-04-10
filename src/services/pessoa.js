@@ -15,7 +15,7 @@ class ServicoExercicio {
     }
 
     async Adicionar(pessoa){
-      if(!pessoa) {
+      if(!pessoa) { // sera que aqui não deveria puxar o id da pessoa?
         throw new Error("Favor preencher o pessoa.")
       } else if(!pessoa.nome) {
         throw new Error("Favor preencher o nome.")

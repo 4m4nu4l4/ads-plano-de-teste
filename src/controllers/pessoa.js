@@ -16,7 +16,7 @@ class ControllerExercicio {
       }
     }
 
-    async PegarTodos(_, res){
+    async PegarTodos(_, res){ // erro aqui
       try {
         const result = await servico.PegarTodos()
 
