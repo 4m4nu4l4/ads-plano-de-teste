@@ -21,7 +21,7 @@ class RepositorioExercicio {
     async Alterar(id, pessoa){
         return Pessoa.update(pessoa, {
             where: {
-                id
+                id     // certeza que isso aqui é um erro tmb
             }
         })
     }

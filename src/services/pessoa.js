@@ -5,7 +5,7 @@ class ServicoExercicio {
 
     async PegarUm(id){
       if(!id || isNaN(id)) {
-        throw new Error("Favor corretamente o id.")
+        throw new Error("Favor digite corretamente o id.")
       }
       return repositorio.PegarUm(id)
     }
