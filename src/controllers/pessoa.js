@@ -26,7 +26,7 @@ class ControllerExercicio {
       }
     }
 
-    async Adicionar(req, res){
+   /* async Adicionar(req, res){
       try {
         const { pessoa } = req.body
 
@@ -35,9 +35,27 @@ class ControllerExercicio {
         res.status(201).json({ message: "Adicionado com sucesso!"});
       } catch (error) {
         if(error.parent.code === "ER_DUP_ENTRY") {
-          res.status(500).json({ message: "Email já cadastrado!"});
+          res.status(400).json({ message: "Email já cadastrado!"});
+        } else{
+          res.status(400).json({ message: error.message || error.message});
         }
-        res.status(500).json({ message: error.parent.message || error.message});
+      }
+    }
+*/
+    //zeca
+    async Adicionar(req, res){
+      try {
+        const { pessoa } = req.body
+ 
+        await servico.Adicionar(pessoa)
+       
+        res.status(201).json({ message: "Adicionado com sucesso!"});
+      } catch (error) {
+        if(error.parent && error.parent.code === "ER_DUP_ENTRY") {
+          res.status(400).json({ message: "Email já cadastrado!"});
+        }else{
+          res.status(404).json({ message: error.message});
+        }
       }
     }
 

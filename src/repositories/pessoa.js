@@ -1,4 +1,4 @@
-const Pessoa = require('../models/pessoa.js');
+const Pessoa = require('../models/pessoa.js'); //erro aqui
 
 class RepositorioExercicio {
 

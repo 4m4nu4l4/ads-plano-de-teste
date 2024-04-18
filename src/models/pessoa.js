@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database.js');
 
-const Pessoa = sequelize.define('pessoas', {
+const Pessoa = sequelize.define('pessoas', { // cara de erro
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER
