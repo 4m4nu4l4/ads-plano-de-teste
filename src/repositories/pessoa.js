@@ -22,7 +22,9 @@ class RepositorioExercicio {
         return Pessoa.update(pessoa, {
             where: {
                 id     // certeza que isso aqui é um erro tmb
-                // id: id
+               
+
+                // 
             }
         })
     }
