@@ -14,7 +14,7 @@ class RepositorioExercicio {
         return Pessoa.findAll();
     }
 
-    async Adicionar(pessoa){
+    async Adicionar(id, pessoa){
         return Pessoa.create({ ...pessoa});
     }
 
