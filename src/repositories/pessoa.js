@@ -1,42 +1,39 @@
-const Pessoa = require('../models/pessoa.js'); //erro aqui
+const Pessoa = require('../models/pessoa.js');
 
 class RepositorioExercicio {
 
     async PegarUm(id){
         return Pessoa.findOne({
             where: {
-                id
+                id: id  // arrumou aqui
             }
-        })
+        });
     }
 
     async PegarTodos(){
-        return Pessoa.findAll()
+        return Pessoa.findAll();
     }
 
     async Adicionar(pessoa){
-        return Pessoa.create({ ...pessoa})
+        return Pessoa.create({ ...pessoa});
     }
 
     async Alterar(id, pessoa){
         return Pessoa.update(pessoa, {
             where: {
-                id     // certeza que isso aqui é um erro tmb
-               
-
-                // 
+                id: id // arrumou aqui
             }
-        })
+        });
     }
 
     async Deletar(id){
         return Pessoa.destroy({
             where: {
-                id   
+                id: id  // arrumou aqui
             }
-        })
+        });
     }
 
 }
 
-module.exports = RepositorioExercicio
+module.exports = RepositorioExercicio;

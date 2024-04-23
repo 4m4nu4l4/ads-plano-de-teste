@@ -62,6 +62,10 @@ class ControllerExercicio {
     }
   }*/
 
+
+  //Assim como na função Adicionar, adicionamos uma verificação para garantir que req.body.pessoa esteja definido antes de tentar usá-lo. 
+  //Isso evita possíveis erros se o corpo da requisição não incluir o objeto pessoa.
+  
   async Alterar(req, res) {
     try {
         const id = req.params.id;
@@ -81,9 +85,9 @@ class ControllerExercicio {
 
   async Deletar(req, res) {
     try {
-      const id = req.params.id
+      const id = req.params.id;
 
-      await servico.Deletar(id)
+      await servico.Deletar(id);
 
       res.status(200).json({ message: "Deletado com sucesso!" });
     } catch (error) {
@@ -94,4 +98,4 @@ class ControllerExercicio {
 
 }
 
-module.exports = ControllerExercicio
+module.exports = ControllerExercicio;
