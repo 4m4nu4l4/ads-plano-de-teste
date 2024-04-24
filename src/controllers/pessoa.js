@@ -1,4 +1,6 @@
 const ServicoExercicio = require("../services/pessoa.js");
+const  { validarSenha, validarEmail } = require('../utils/validation.js');
+const   pessoa = require('../models/pessoa.js');
 
 const servico = new ServicoExercicio()
 class ControllerExercicio {
@@ -29,25 +31,28 @@ class ControllerExercicio {
   //  No código corrigido, adicionamos uma verificação para garantir que req.body.pessoa esteja definido antes de tentar acessá-lo. 
   // Isso evita possíveis erros se o corpo da requisição não incluir o objeto pessoa.
   async Adicionar(req, res) {
+    const {pessoa} = req.body;
     try {
-        const { pessoa } = req.body;
+        const {email, senha } = req.body.pessoa; // Acessando os campos email e senha do objeto Pessoa
 
-        if (!pessoa) {
-            throw new Error("Pessoa não está definido na requisição!");
+        // Verificar se o email está em um formato válido
+        if (!validarEmail(email)) {
+            return res.status(400).json({ error: 'Formato de e-mail inválido.' });
         }
 
-        await servico.Adicionar(pessoa);
+        // Verificar se a senha atende aos critérios de segurança
+        if (!validarSenha(senha)) {
+            return res.status(400).json({ error: 'A senha não atende aos critérios de segurança.' });
+        }
         
-        res.status(201).json({ message: "Adicionado com sucesso!" });
+        await servico.Adicionar(pessoa)
+
+        // Restante da lógica para adicionar a pessoa ao banco de dados...
     } catch (error) {
-        if (error.parent && error.parent.code === "ER_DUP_ENTRY") {
-            res.status(400).json({ message: "Email já cadastrado!" });
-        } else {
-            res.status(404).json({ message: error.message });
-        }
+        console.error(error);
+        return res.status(500).json({ error: 'Erro ao adicionar pessoa.' });
     }
 }
-
 /*  async Alterar(req, res) {
     try {
       const id = req.params.id;
