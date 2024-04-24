@@ -30,28 +30,34 @@ class ControllerExercicio {
 
   //  No código corrigido, adicionamos uma verificação para garantir que req.body.pessoa esteja definido antes de tentar acessá-lo. 
   // Isso evita possíveis erros se o corpo da requisição não incluir o objeto pessoa.
-  async Adicionar(req, res) {
-    const {pessoa} = req.body;
-    try {
-        const {email, senha } = req.body.pessoa; // Acessando os campos email e senha do objeto Pessoa
+  async Adicionar(pessoa) {
+    if (!pessoa.nome) {
+      throw new Error("Favor preencher o nome.");
+  } else if (!pessoa.email) {
+      throw new Error("Favor preencher o email.");
+  } else if (!pessoa.senha) {
+      throw new Error("Favor preencher o senha.");
+  }
 
-        // Verificar se o email está em um formato válido
-        if (!validarEmail(email)) {
-            return res.status(400).json({ error: 'Formato de e-mail inválido.' });
-        }
+  // Expressão regular para validar o formato de um e-mail
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // Verificar se a senha atende aos critérios de segurança
-        if (!validarSenha(senha)) {
-            return res.status(400).json({ error: 'A senha não atende aos critérios de segurança.' });
-        }
-        
-        await servico.Adicionar(pessoa)
+  // Expressão regular para validar a senha
+  // Pelo menos uma letra maiúscula, uma letra minúscula, um número,
+  // um caractere especial e no mínimo 8 caracteres
+  const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        // Restante da lógica para adicionar a pessoa ao banco de dados...
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Erro ao adicionar pessoa.' });
-    }
+  // Verificar se o email está em um formato válido
+  if (!emailRegex.test(pessoa.email)) {
+      throw new Error('Formato de e-mail inválido.');
+  }
+
+  // Verificar se a senha atende aos critérios de segurança
+  if (!senhaRegex.test(pessoa.senha)) {
+      throw new Error('A senha não atende aos critérios de segurança.');
+  }
+
+  return repositorio.Adicionar(pessoa);
 }
 /*  async Alterar(req, res) {
     try {

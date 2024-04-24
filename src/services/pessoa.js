@@ -5,7 +5,7 @@ class ServicoExercicio {
 
   async PegarUm(id) {
     if (!id || isNaN(id)) {
-      throw new Error("Favor digite corretamente o id.") // sarah comentou aqui 
+      throw new Error("Favor digite corretamente o id.") 
     }
     return repositorio.PegarUm(id)
   }
@@ -15,12 +15,25 @@ class ServicoExercicio {
   }
 
   async Adicionar(pessoa) {
+
     if (!pessoa.nome) {
       throw new Error("Favor preencher o nome.");
   } else if (!pessoa.email) {
       throw new Error("Favor preencher o email.");
   } else if (!pessoa.senha) {
-      throw new Error("Favor preencher o senha.");
+
+    if (!pessoa) {
+      throw new Error("Favor preencher o pessoa.")
+    } else if (!pessoa.nome) {
+      throw new Error("Favor preencher o nome.")
+    } else if (!pessoa.email) {
+      throw new Error("Favor preencher o email.")
+    } else if (!pessoa.senha) {
+      throw new Error("Favor preencher o senha.")
+    }
+
+    return repositorio.Adicionar(pessoa)
+
   }
 
   // Expressão regular para validar o formato de um e-mail
@@ -48,7 +61,7 @@ class ServicoExercicio {
       throw new Error("Favor corretamente o id.")
     }
 
-    return repositorio.Alterar(id, pessoa) // aqui é alterar não adicionar, corrigiuuuu
+    return repositorio.Alterar(id, pessoa) // aqui é alterar não adicionar
   }
 
   async Deletar(id) {
