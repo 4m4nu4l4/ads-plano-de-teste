@@ -5,7 +5,7 @@ class ServicoExercicio {
 
   async PegarUm(id) {
     if (!id || isNaN(id)) {
-      throw new Error("Favor digite corretamente o id.") // sarah comentou aqui 
+      throw new Error("Favor digite corretamente o id.") 
     }
     return repositorio.PegarUm(id)
   }
@@ -15,7 +15,7 @@ class ServicoExercicio {
   }
 
   async Adicionar(pessoa) {
-    if (!pessoa) { // sera que aqui não deveria puxar o id da pessoa?
+    if (!pessoa) {
       throw new Error("Favor preencher o pessoa.")
     } else if (!pessoa.nome) {
       throw new Error("Favor preencher o nome.")
@@ -33,7 +33,7 @@ class ServicoExercicio {
       throw new Error("Favor corretamente o id.")
     }
 
-    return repositorio.Alterar(id, pessoa) // aqui é alterar não adicionar, corrigiuuuu
+    return repositorio.Alterar(id, pessoa) // aqui é alterar não adicionar
   }
 
   async Deletar(id) {
