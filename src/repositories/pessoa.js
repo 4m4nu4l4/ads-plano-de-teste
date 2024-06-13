@@ -14,18 +14,18 @@ class RepositorioExercicio {
         return Pessoa.findAll();
     }
 
-    async Adicionar(id, pessoa){
-        return Pessoa.create({ ...pessoa});
+    async Adicionar(pessoa, transaction){
+        return Pessoa.create({ ...pessoa}, transaction);
     }
 
     async Alterar(id, pessoa){
         return Pessoa.update(pessoa, {
             where: {
-                id: id // arrumou aqui
+                id
             }
-        });
+        })
     }
-
+    
     async Deletar(id){
         return Pessoa.destroy({
             where: {

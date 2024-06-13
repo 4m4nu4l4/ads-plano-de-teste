@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "dev": "",
-    "test": "jest test/**.test.js"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

@@ -14,7 +14,7 @@ class ServicoExercicio {
     return repositorio.PegarTodos()
   }
 
-  async Adicionar(pessoa) {
+  async Adicionar(pessoa, transaction){
 
     if (!pessoa.nome) {
       throw new Error("Favor preencher o nome.");
@@ -32,7 +32,7 @@ class ServicoExercicio {
         throw new Error("Favor preencher o senha.")
       }
 
-      return repositorio.Adicionar(pessoa)
+      return repositorio.Adicionar(pessoa, transaction)
 
     }
 
@@ -56,12 +56,12 @@ class ServicoExercicio {
 
     return repositorio.Adicionar(pessoa);
   }
-  async Alterar(id, pessoa) {
+  async Alterar(id, pessoa, transaction) {
     if (!id || isNaN(id)) {
       throw new Error("Favor corretamente o id.")
     }
 
-    return repositorio.Alterar(id, pessoa) // aqui é alterar não adicionar
+    return repositorio.Alterar(id, pessoa, transaction) // aqui é alterar não adicionar
   }
 
   async Deletar(id) {
